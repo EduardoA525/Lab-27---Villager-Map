@@ -33,14 +33,19 @@ int main() {
 
         switch (choice){
             case 1:
+                cout << endl;
                 plusFriendship(villagers);
+                cout << endl;
                 break;
 
             case 2:
+                cout << endl;
                 minusFriendship(villagers);
+                cout << endl;
                 break;
 
             case 3: {
+                cout << endl;
                 string name;
 
                 cout << "Villager name to search: ";
@@ -55,17 +60,17 @@ int main() {
                     cout << get<2>(it->second) << "]" << endl;
                 }
                 else {
-                    cout << "Resident " << name << " was not found in the registry." << endl;
+                    cout << "\nResident " << name << " was not found in the registry." << endl;
                 }
                 break;
             }
 
             case 4:
-                cout << "Program Exiting." << endl;
+                cout << "\nProgram Exiting." << endl;
                 break;
 
             default:
-                cout << "Error. Try again." << endl;
+                cout << "\nError. Try again." << endl;
         }
     }
 
@@ -119,6 +124,7 @@ int main() {
 }
 
 void displayVillagers(const map<string, tuple<int,string,string>> &villagers){
+    cout << "\nVillager details:" << endl;
     for (auto pair : villagers){
         cout << pair.first << " [";
         cout << get<0>(pair.second) << ", ";
@@ -141,10 +147,10 @@ void plusFriendship(map<string,tuple<int,string,string>> &villagers){
 
         get<0>(it->second) = fPoints;
 
-        cout << name << "'s friendship points went up!" << endl;
+        cout << "\n" << name << "'s friendship points went up!" << endl;
     }
     else {
-        cout << "Resident " << name << " was not found in the registry." << endl;
+        cout << "\nResident " << name << " was not found in the registry." << endl;
     }
 
     displayVillagers(villagers);
@@ -168,11 +174,11 @@ void minusFriendship(map<string,tuple<int,string,string>> &villagers){
             cout << name << "'s friendship points went down!" << endl;
         }
         else {
-            cout << name << "'s friendship points can't go lower than 0!" << endl;
+            cout << "\n" << name << "'s friendship points can't go lower than 0!" << endl;
         }
     }
     else {
-        cout << "Resident " << name << " was not found in the registry." << endl;
+        cout << "\nResident " << name << " was not found in the registry." << endl;
     }
 
     displayVillagers(villagers);
