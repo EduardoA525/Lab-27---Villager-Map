@@ -11,6 +11,7 @@ using namespace std;
 void displayVillagers(const map<string, tuple<int, string, string>> &villagers);
 void plusFriendship(map<string, tuple<int,string,string>> &villagers);
 void minusFriendship(map<string,tuple<int,string,string>> &villagers);
+void addVillager(map<string,tuple<int,string,string>> &villagers);
 
 int main() {
     // declarations
@@ -121,6 +122,37 @@ int main() {
     */
 
     return 0;
+}
+
+void addVillager(map<string,tuple<int,string,string>> &villagers){
+    string name;
+    int fPoints;
+    string species;
+    string catchphrase;
+
+    cout << "\nEnter new villager's name: ";
+    getline(cin, name);
+
+    //make sure villager doesnt exist
+    if (villagers.find(name) != villagers.end()){
+        cout << "\nVillager Resident exists in the registry!" << endl;
+        return;
+    }
+
+    cout << "Enter Friendship Level 0-10: ";
+    cin >> fPoints;
+    cin.ignore(10000,'\n');
+
+    cout << "Enter Species: ";
+    getline(cin,species);
+
+    cout << "Enter Catchprase: ";
+    getline(cin,catchphrase);
+
+    villagers[name] = make_tuple(fPoints,species,catchphrase);
+
+    cout << "Villager Resident " << name << " added to the registry." << endl;
+    displayVillagers(villagers);
 }
 
 void displayVillagers(const map<string, tuple<int,string,string>> &villagers){
