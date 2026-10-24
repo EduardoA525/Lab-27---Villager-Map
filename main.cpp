@@ -8,6 +8,10 @@
 #include <tuple>
 using namespace std;
 
+void displayVillagers(const map<string, tuple<int, string, string>> &villagers);
+void plusFriendship(map<string, tuple<int,string,string>> &villagers);
+//void minusFriendship(map<string,tuple<int,string,string>> &villagers);
+
 int main() {
     // declarations
     map<string, tuple<int, string, string>> villagers;
@@ -62,3 +66,59 @@ int main() {
 
     return 0;
 }
+
+void displayVillagers(const map<string, tuple<int,string,string>> &villagers){
+    for (auto pair : villagers){
+        cout << pair.first << " [";
+        cout << get<0>(pair.second) << ", ";
+        cout << get<1>(pair.second) << ", ";
+        cout << get<2>(pair.second) << "]" << endl;
+    }
+}
+
+void plusFriendship(map<string,tuple<int,string,string>> &villagers){
+    string name;
+
+    cout << "What is villager resident's name: ";
+    getline(cin, name);
+
+    auto it = villagers.find(name);
+
+    if (it != villagers.end()) {
+        int fPoints = get<0>(it->second);
+        fPoints++;
+
+        get<0>(it->second) = fPoints;
+
+        cout << name << " 's friendship points went up!" << endl;
+    }
+    else {
+        cout << "Resident " << name << " was not found in the registry." << endl;
+    }
+
+    displayVillagers(villagers);
+}
+/*
+void minusFriendship(map<string,tuple<int,string,string>> &villagers){
+    string name;
+
+    cout << "What is villager resident's name: ";
+    getline(cin, name);
+
+    auto it = villagers.find(name);
+
+    if (it != villagers.end()) {
+        int fPoints = get<0>(it->second);
+        fPoints++;
+
+        get<0>(it->second) = fPoints;
+
+        cout << name << " 's friendship points went up!" << endl;
+    }
+    else {
+        cout << "Resident " << name << " was not found in the registry." << endl;
+    }
+
+    displayVillagers(villagers);
+}
+    */
