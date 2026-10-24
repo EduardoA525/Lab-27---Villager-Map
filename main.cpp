@@ -10,7 +10,7 @@ using namespace std;
 
 void displayVillagers(const map<string, tuple<int, string, string>> &villagers);
 void plusFriendship(map<string, tuple<int,string,string>> &villagers);
-//void minusFriendship(map<string,tuple<int,string,string>> &villagers);
+void minusFriendship(map<string,tuple<int,string,string>> &villagers);
 
 int main() {
     // declarations
@@ -90,7 +90,7 @@ void plusFriendship(map<string,tuple<int,string,string>> &villagers){
 
         get<0>(it->second) = fPoints;
 
-        cout << name << " 's friendship points went up!" << endl;
+        cout << name << "'s friendship points went up!" << endl;
     }
     else {
         cout << "Resident " << name << " was not found in the registry." << endl;
@@ -98,7 +98,7 @@ void plusFriendship(map<string,tuple<int,string,string>> &villagers){
 
     displayVillagers(villagers);
 }
-/*
+
 void minusFriendship(map<string,tuple<int,string,string>> &villagers){
     string name;
 
@@ -109,11 +109,16 @@ void minusFriendship(map<string,tuple<int,string,string>> &villagers){
 
     if (it != villagers.end()) {
         int fPoints = get<0>(it->second);
-        fPoints++;
 
-        get<0>(it->second) = fPoints;
-
-        cout << name << " 's friendship points went up!" << endl;
+        //check to make sure it doesnt go negative
+        if (fPoints > 0){
+            fPoints--;
+            get<0>(it->second) = fPoints;
+            cout << name << "'s friendship points went down!" << endl;
+        }
+        else {
+            cout << name << "'s friendship points can't go lower than 0!" << endl;
+        }
     }
     else {
         cout << "Resident " << name << " was not found in the registry." << endl;
@@ -121,4 +126,3 @@ void minusFriendship(map<string,tuple<int,string,string>> &villagers){
 
     displayVillagers(villagers);
 }
-    */
