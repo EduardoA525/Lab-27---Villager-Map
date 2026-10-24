@@ -21,7 +21,7 @@ int main() {
     cout << "Villager details (range-based for loop):" << endl;
 
     for (auto pair : villagers) {
-        cout << pair.first << "[";
+        cout << pair.first << " [";
         cout << get<0>(pair.second) << ", ";
         cout << get<1>(pair.second) << ", ";
         cout << get<2>(pair.second) << "] " << endl;
@@ -32,15 +32,10 @@ int main() {
 
     for (map<string, tuple<int, string, string>>::iterator it = villagers.begin(); 
             it != villagers.end(); ++it) {
-        cout << it->first << "[";
+        cout << it->first << " [";
         cout << get<0>(it->second) << ", ";
-        cout << get<0>(it->second) << ", ";
-        cout << get<0>(it->second) << ", " << endl;
-
-
-
-
-        cout << endl;
+        cout << get<1>(it->second) << ", ";
+        cout << get<2>(it->second) << "]" << endl;
     }
 
     // delete an element
@@ -49,12 +44,14 @@ int main() {
     // search for an element using .find() to avoid errors
     string searchKey = "Audie";
     auto it = villagers.find(searchKey);
+
     if (it != villagers.end()) {  // the iterator points to beyond the end of the map
-                                       // if searchKey is not found
-        cout << "\nFound " << searchKey << "'s favorite colors: ";
-        for (auto color : it->second)  // range loop to traverse the value/vector
-            cout << color << " ";
-        cout << endl;
+
+        cout << "\nFound " << searchKey << ": " << endl;
+        cout << searchKey << " [";
+        cout << get<0>(it->second) << ", ";
+        cout << get<1>(it->second) << ", ";
+        cout << get<2>(it->second) << "]" << endl;
     } else
         cout << endl << searchKey << " not found." << endl;
 
