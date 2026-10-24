@@ -12,6 +12,7 @@ void displayVillagers(const map<string, tuple<int, string, string>> &villagers);
 void plusFriendship(map<string, tuple<int,string,string>> &villagers);
 void minusFriendship(map<string,tuple<int,string,string>> &villagers);
 void addVillager(map<string,tuple<int,string,string>> &villagers);
+void deleteVillager(map<string,tuple<int,string,string>> &villagers);
 
 int main() {
     // declarations
@@ -124,37 +125,6 @@ int main() {
     return 0;
 }
 
-void addVillager(map<string,tuple<int,string,string>> &villagers){
-    string name;
-    int fPoints;
-    string species;
-    string catchphrase;
-
-    cout << "\nEnter new villager's name: ";
-    getline(cin, name);
-
-    //make sure villager doesnt exist
-    if (villagers.find(name) != villagers.end()){
-        cout << "\nVillager Resident exists in the registry!" << endl;
-        return;
-    }
-
-    cout << "Enter Friendship Level 0-10: ";
-    cin >> fPoints;
-    cin.ignore(10000,'\n');
-
-    cout << "Enter Species: ";
-    getline(cin,species);
-
-    cout << "Enter Catchprase: ";
-    getline(cin,catchphrase);
-
-    villagers[name] = make_tuple(fPoints,species,catchphrase);
-
-    cout << "Villager Resident " << name << " added to the registry." << endl;
-    displayVillagers(villagers);
-}
-
 void displayVillagers(const map<string, tuple<int,string,string>> &villagers){
     cout << "\nVillager details:" << endl;
     for (auto pair : villagers){
@@ -211,6 +181,56 @@ void minusFriendship(map<string,tuple<int,string,string>> &villagers){
     }
     else {
         cout << "\nResident " << name << " was not found in the registry." << endl;
+    }
+
+    displayVillagers(villagers);
+}
+
+void addVillager(map<string,tuple<int,string,string>> &villagers){
+    string name;
+    int fPoints;
+    string species;
+    string catchphrase;
+
+    cout << "\nEnter new villager's name: ";
+    getline(cin, name);
+
+    //make sure villager doesnt exist
+    if (villagers.find(name) != villagers.end()){
+        cout << "\nVillager Resident exists in the registry!" << endl;
+        return;
+    }
+
+    cout << "Enter Friendship Level 0-10: ";
+    cin >> fPoints;
+    cin.ignore(10000,'\n');
+
+    cout << "Enter Species: ";
+    getline(cin,species);
+
+    cout << "Enter Catchprase: ";
+    getline(cin,catchphrase);
+
+    villagers[name] = make_tuple(fPoints,species,catchphrase);
+
+    cout << "Villager Resident " << name << " added to the registry." << endl;
+    displayVillagers(villagers);
+}
+
+void deleteVillager(map<string,tuple<int,string,string>> &villagers){
+    string name;
+
+    cout << "\nEnter villager resident to remove from registry: ";
+    getline(cin,name);
+
+    auto it = villagers.find(name);
+
+    if (it != villagers.end()){
+        villagers.erase(it);
+        cout << "\nVillager resident " << name << " was removed from registry." << endl;
+    }
+    else {
+        cout << "\nResident " << name << " was not found in registry." << endl;
     }
 
     displayVillagers(villagers);
